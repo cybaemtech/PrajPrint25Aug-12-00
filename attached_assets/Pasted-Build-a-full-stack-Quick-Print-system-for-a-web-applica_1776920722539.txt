@@ -1,0 +1,173 @@
+Build a full-stack "Quick Print" system for a web application similar to https://prajprint.netlify.app/.
+
+The system must support two roles:
+
+1. User
+2. Admin
+
+---
+
+## 🔹 CORE FLOW (USER SIDE)
+
+1. When user clicks "Quick Print":
+
+   * Open upload screen
+   * Allow file types: PDF, DOCX, JPG, PNG
+   * Show preview of uploaded file
+
+2. After upload:
+
+   * Show "Scan Printers" button
+
+3. When user clicks "Scan Printers":
+   Show options:
+
+   * WiFi Printers
+   * Bluetooth Printers (mock or API-based)
+   * USB Printers (mock or API-based)
+   * Manual IP Entry
+
+4. WiFi Printer Flow:
+
+   * Call backend API: /api/printers/network
+   * Backend scans network using IP range or stored printers
+   * Return list:
+     [
+     { id, name, ip, status }
+     ]
+   * Display printers in UI
+
+5. Manual IP Flow:
+
+   * Input field for IP address
+   * Validate IP format
+   * Add printer to list
+
+6. Printer Selection:
+
+   * User selects printer
+   * Show print settings:
+
+     * Copies
+     * Color / Black & White
+     * Page size
+
+7. Print Action:
+
+   * Call backend: /api/print
+   * Send:
+     {
+     userId,
+     fileUrl,
+     printerId,
+     printerIP,
+     settings,
+     timestamp
+     }
+
+---
+
+## 🔹 BACKEND REQUIREMENTS
+
+1. Printer Discovery:
+
+   * Scan local network (e.g. 192.168.1.x)
+   * Use Node.js library or OS commands
+   * Return available printers
+
+2. Print Service:
+
+   * Accept file + printer IP
+   * Send job to printer (use libraries like node-printer / IPP)
+
+3. Store Data in JSON (No DB):
+   Create files:
+
+   * users.json
+   * printers.json
+   * printHistory.json
+
+4. Save Print History:
+   Example:
+   {
+   id,
+   userId,
+   username,
+   fileName,
+   printerName,
+   printerIP,
+   copies,
+   status,
+   createdAt
+   }
+
+---
+
+## 🔹 ADMIN PANEL
+
+1. View all print history
+2. Filter by:
+
+   * User
+   * Date
+   * Printer
+3. View statistics:
+
+   * Total prints
+   * Active users
+   * Most used printer
+
+---
+
+## 🔹 FRONTEND (React)
+
+1. Pages:
+
+   * Upload Page
+   * Printer Selection Page
+   * Print Settings Page
+   * History Page
+   * Admin Dashboard
+
+2. State Management:
+
+   * Use React Context or Redux
+
+3. UI Requirements:
+
+   * Clean modern UI
+   * Step-based progress:
+     Upload → Select Printer → Settings → Print → History
+
+---
+
+## 🔹 EXTRA FEATURES
+
+* Show loader while scanning printers
+* Show "No printers found" fallback
+* Retry scan option
+* Save frequently used printers
+* Toast notifications (success/failure)
+
+---
+
+## 🔹 IMPORTANT NOTES
+
+* Bluetooth and USB scanning should be mocked if not available
+* Real printing should work via IP-based printers
+* Ensure full end-to-end flow works without breaking
+
+---
+
+## 🔹 OUTPUT REQUIRED
+
+* Full frontend code (React)
+* Backend API (Node.js / Express)
+* JSON data storage system
+* Working APIs for:
+
+  * Printer scan
+  * Print job
+  * History
+
+Ensure code is modular, production-ready, and easy to extend.

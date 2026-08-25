@@ -1,0 +1,5 @@
+{
+  "agentUrl": "http://localhost:7171",
+  "agentKey": "",
+  "snmpCommunity": "public"
+}

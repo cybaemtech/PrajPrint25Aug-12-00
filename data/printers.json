@@ -1,0 +1,12 @@
+[
+  {
+    "id": "net-192.168.0.77",
+    "name": "Network Printer 192.168.0.77",
+    "ip": "192.168.0.77",
+    "port": 9100,
+    "location": "Subnet 192.168.0.0/24",
+    "status": "online",
+    "type": "bw",
+    "discoveredVia": "RAW/9100"
+  }
+]

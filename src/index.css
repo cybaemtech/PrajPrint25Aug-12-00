@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 25% 97%;
+    --foreground: 222 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 25% 10%;
+
+    --primary: 213 70% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 213 20% 93%;
+    --secondary-foreground: 222 25% 15%;
+
+    --muted: 213 20% 94%;
+    --muted-foreground: 213 15% 48%;
+
+    --accent: 213 25% 92%;
+    --accent-foreground: 222 25% 15%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 213 18% 88%;
+    --input: 213 18% 88%;
+    --ring: 213 70% 30%;
+
+    --radius: 0.5rem;
+
+    --success: 142 65% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 90% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Sidebar — deep navy matching Cybaem Tech brand */
+    --sidebar-background: 222 35% 11%;
+    --sidebar-foreground: 213 20% 82%;
+    --sidebar-primary: 213 65% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 30% 17%;
+    --sidebar-accent-foreground: 213 20% 90%;
+    --sidebar-border: 222 25% 18%;
+    --sidebar-ring: 213 65% 50%;
+
+    /* Glass / elevation helpers */
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 30px -4px rgb(0 0 0 / 0.10), 0 4px 8px -4px rgb(0 0 0 / 0.06);
+  }
+
+  .dark {
+    --background: 222 28% 7%;
+    --foreground: 210 20% 95%;
+
+    --card: 222 25% 10%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 222 25% 10%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 213 65% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 18% 17%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 222 18% 16%;
+    --muted-foreground: 213 15% 52%;
+
+    --accent: 222 18% 17%;
+    --accent-foreground: 210 20% 90%;
+
+    --destructive: 0 62% 42%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 16% 20%;
+    --input: 222 16% 20%;
+    --ring: 213 65% 55%;
+
+    --success: 142 60% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 90% 48%;
+    --warning-foreground: 0 0% 100%;
+
+    --sidebar-background: 222 35% 7%;
+    --sidebar-foreground: 213 20% 78%;
+    --sidebar-primary: 213 65% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 30% 13%;
+    --sidebar-accent-foreground: 213 20% 85%;
+    --sidebar-border: 222 25% 14%;
+    --sidebar-ring: 213 65% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
+}
+
+@layer utilities {
+  .text-2xs { font-size: 0.65rem; line-height: 1rem; }
+
+  /* Glass card */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.8);
+  }
+
+  /* Subtle mesh background for pages */
+  .bg-mesh {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(at 20% 10%, hsl(213 70% 30% / 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 80%, hsl(213 70% 30% / 0.03) 0px, transparent 50%);
+  }
+
+  /* Animated pulse ring for status */
+  .ring-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    border: 2px solid currentColor;
+    animation: ring-fade 2s ease-out infinite;
+  }
+  @keyframes ring-fade {
+    0%   { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0;   transform: scale(1.6); }
+  }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card-lift:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+}
